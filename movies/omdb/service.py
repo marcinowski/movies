@@ -1,5 +1,5 @@
-from omdb_fetcher.fetcher import OMDBFetcher
-from omdb_fetcher.parser import OMDBParser
+from omdb.fetcher import OMDBFetcher
+from omdb.parser import OMDBParser
 
 
 class OMDBService(object):

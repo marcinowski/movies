@@ -1,7 +1,7 @@
 import re
 import PIL
 from movie_list import models as mov
-from omdb_fetcher.mapping import OMDB_MODEL_MAPPING
+from omdb.mapping import OMDB_MODEL_MAPPING
 
 
 # TODO: generalize resolving fields into db, write tests, handle exceptions with parsing
