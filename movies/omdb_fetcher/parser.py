@@ -4,6 +4,9 @@ from movie_list import models as mov
 from omdb_fetcher.mapping import OMDB_MODEL_MAPPING
 
 
+# TODO: generalize resolving fields into db, write tests, handle exceptions with parsing
+
+
 class OMDBParser(object):
     def __init__(self, data):
         self.mapping = OMDB_MODEL_MAPPING
@@ -14,16 +17,16 @@ class OMDBParser(object):
             title=self._resolve_title_field(),
             description=self._resolve_description_field(),
             year=self._resolve_year_field(),
-            # metascore=self._resolve_metascore_field(),
-            # imdb_rating=self._resolve_imdb_rating_field(),
-            # imdb_url=self._resolve_url_field(),
-            # country=self._resolve_country_field
+            metascore=self._resolve_metascore_field(),
+            imdb_rating=self._resolve_imdb_rating_field(),
+            imdb_url=self._resolve_url_field(),
             # **self._resolve_text_fields()
         )
 
         # genre = self._resolve_genre_field(),
         # director = self._resolve_director_field(),
         # actors = self._resolve_actors_field(),
+        # country=self._resolve_country_field
 
     # def _resolve_text_fields(self):
     #     return {
