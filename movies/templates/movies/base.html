@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Awesome site</title>
+    </head>
+    <body>
+        <div class="col-md-10">
+            {% block content %}
+            {% endblock %}
+            {% load static from staticfiles %}
+            <link href="{% static 'movies/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+        </div>
+    </body>
+</html>

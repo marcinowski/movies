@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Movies</h2>
+    <ul class="media-list">
+        {% for movie in object_list %}
+        <li class="media">
+            <div class="media-left">
+                <!--<a href="#">-->
+                <!--<img class="media-object" src="..." alt="...">-->
+                <!--</a>-->
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ movie.title }}</h4>
+                {{ movie.description }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
