@@ -22,11 +22,10 @@ class OMDBParser(object):
             imdb_url=self._resolve_url_field(),
             # **self._resolve_text_fields()
         )
-
-        # genre = self._resolve_genre_field(),
-        # director = self._resolve_director_field(),
-        # actors = self._resolve_actors_field(),
-        # country=self._resolve_country_field
+        obj.genre = self._resolve_genre_field(),
+        obj.director = self._resolve_director_field(),
+        obj.actors = self._resolve_actors_field(),
+        obj.country = self._resolve_country_field
 
     # def _resolve_text_fields(self):
     #     return {
@@ -41,10 +40,16 @@ class OMDBParser(object):
 
     @staticmethod
     def _parse_int_values(value):
-        return int(value)
+        try:
+            return int(value)
+        except ValueError:
+            pass
 
     def _resolve_year_field(self):
-        return self._parse_int_values(self.data['Year'])
+        try:
+            return self._parse_int_values(self.data['Year'])
+        except (ValueError, KeyError):
+            pass
 
     def _resolve_metascore_field(self):
         return self._parse_int_values(self.data['Metascore'])
@@ -62,9 +67,9 @@ class OMDBParser(object):
 
     def _resolve_relational_field(self, model, value):
         objects = self._parse_multivalue_field(value)
-        return [
-            model.objects.get_or_create(name=obj) for obj in objects
-        ]
+        for obj in objects:
+            model.objects.get_or_create(name=obj)
+        return model.objects.filter(name__in=objects)
 
     def _resolve_country_field(self):
         return self._resolve_relational_field(mov.Country, self.data['Country'])
