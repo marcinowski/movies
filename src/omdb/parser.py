@@ -20,17 +20,11 @@ class OMDBParser(object):
             metascore=self._resolve_metascore_field(),
             imdb_rating=self._resolve_imdb_rating_field(),
             imdb_url=self._resolve_url_field(),
-            # **self._resolve_text_fields()
         )
-        obj.genre = self._resolve_genre_field(),
-        obj.director = self._resolve_director_field(),
-        obj.actors = self._resolve_actors_field(),
-        obj.country = self._resolve_country_field
-
-    # def _resolve_text_fields(self):
-    #     return {
-    #         self.mapping[key]: value for key, value in self.data if self.mapping[key]
-    #     }
+        obj.genre = self._resolve_genre_field()
+        obj.director = self._resolve_director_field()
+        obj.actors = self._resolve_actors_field()
+        obj.country = self._resolve_country_field()
 
     def _resolve_title_field(self):
         return self.data['Title']
