@@ -4,12 +4,26 @@
         <meta charset="UTF-8">
         <title>Awesome site</title>
     </head>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <div class="container-fluid">
+                <p class="navbar-text">
+                    Awesome Site
+                </p>
+            </div>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Main Page</a></li>
+            <li><a href="/movie_list/">Movie List</a></li>
+        </ul>
+    </nav>
     <body>
-        <div class="col-md-10">
+        <div class="row col-md-10 col-md-offset-1">
             {% block content %}
             {% endblock %}
             {% load static from staticfiles %}
             <link href="{% static 'movies/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'movies/css/movies.css' %}" rel="stylesheet" type="text/css">
         </div>
     </body>
 </html>

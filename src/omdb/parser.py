@@ -17,6 +17,7 @@ class OMDBParser(object):
             title=self._resolve_title_field(),
             description=self._resolve_description_field(),
             year=self._resolve_year_field(),
+            icon=self._resolve_icon_field(),
             metascore=self._resolve_metascore_field(),
             imdb_rating=self._resolve_imdb_rating_field(),
             imdb_url=self._resolve_url_field(),
@@ -31,6 +32,9 @@ class OMDBParser(object):
 
     def _resolve_description_field(self):
         return self.data['Plot']
+
+    def _resolve_icon_field(self):
+        return self.data['Poster']
 
     @staticmethod
     def _parse_int_values(value):

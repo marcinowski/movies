@@ -1,19 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Movies</h2>
-    <ul class="media-list">
-        {% for movie in object_list %}
-        <li class="media">
-            <div class="media-left">
-                <!--<a href="#">-->
-                <!--<img class="media-object" src="..." alt="...">-->
-                <!--</a>-->
+    <div class="page-header">
+        <h1>Movies</h1>
+    </div>
+    {% for movie in object_list %}
+    {% if forloop.counter|divisibleby:"3" %}
+    <div class="row">
+    {% endif %}
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+            <img src="{{movie.icon}}" alt="Something went wrong :C">
+            <div class="caption">
+                <h3>{{movie.title}} <small>{{movie.year}}</small></h3>
+                <div class="col-sm-6">
+                    <img src="http://findicons.com/files/icons/2229/social_media_mini/32/imdb.png" alt="" title="imdb">
+                    {{movie.imdb_rating|default:"-" }}
+                </div>
+                <div class="col-sm-6">
+                    <img src="http://icons.veryicon.com/32/Internet%20%26%20Web/Social%20Bookmark/Metacritic.png" alt="" title="metacritic">
+                    {{movie.metascore|default:"-" }}
+                </div>
+                <br>
+                <p>{{movie.description}}</p>
             </div>
-            <div class="media-body">
-                <h4 class="media-heading">{{ movie.title }}</h4>
-                {{ movie.description }}
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:"3" %}
+    </div>
+    {% endif %}
+    {% endfor %}
 {% endblock %}
