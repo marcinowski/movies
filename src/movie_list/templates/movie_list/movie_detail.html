@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="page-header">
+        <h1>{{movie.title}} <small>{{movie.year}}</small></h1>
+    </div>
+    <div class="col-sm-6">
+        <img src="{{movie.icon}}" class="img-responsive" alt="Something went wrong :C">
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            Plot:
+            <!--<br>-->
+            {{movie.description}}
+        </div>
+        <br>
+        <div class="row">
+            <table class="table">
+                <tr>
+                    <th>Genre(s):</th>
+                    <td>{{ movie.genre.all|join:", " }}</td>
+                </tr>
+                <tr>
+                    <th>Country:</th>
+                    <td>{{ movie.country.all|join:", " }}</td>
+                </tr>
+                <tr>
+                    <th>Director(s):</th>
+                    <td>{{ movie.director.all|join:", " }}</td>
+                </tr>
+                <tr>
+                    <th>Actor(s):</th>
+                    <td>{{ movie.actors.all|join:", " }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="http://findicons.com/files/icons/2229/social_media_mini/32/imdb.png" alt="" title="imdb">
+                {{movie.imdb_rating|default:"-"}}
+            </div>
+            <div class="col-sm-6">
+                <img src="http://icons.veryicon.com/32/Internet%20%26%20Web/Social%20Bookmark/Metacritic.png" alt="" title="metacritic">
+                {{movie.metascore|default:"-"}}%
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
