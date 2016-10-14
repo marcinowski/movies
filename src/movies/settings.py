@@ -13,16 +13,16 @@ Some helpful tips here: http://www.revsys.com/blog/2014/nov/21/recommended-djang
 """
 
 import os
+from movies import local
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u@(hrb6%a0h+jhlc!)_=#nul!#$j#wf_7tt+q-x0hyisx!ig*&'
+SECRET_KEY = local.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

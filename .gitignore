@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 movies/database/db.sqlite3
-.gitignore
 .idea/
 *.pyc
+db.sqlite3
+local.py
