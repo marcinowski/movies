@@ -23,7 +23,7 @@ class Country(models.Model):
 
 
 class Movie(models.Model):
-    title = models.TextField(max_length=300)
+    title = models.CharField(max_length=100)
     description = models.TextField(blank=True, max_length=300)
     year = models.IntegerField(blank=True, null=True)
     metascore = models.IntegerField(default=0)

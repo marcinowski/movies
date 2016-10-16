@@ -9,9 +9,9 @@
     </div>
     <div class="col-sm-6">
         <div class="row">
-            Plot:
+            <strong>Plot:</strong>
             <!--<br>-->
-            {{movie.description}}
+            <em>{{movie.description}}</em>
         </div>
         <br>
         <div class="row">
@@ -43,6 +43,17 @@
                 <img src="http://icons.veryicon.com/32/Internet%20%26%20Web/Social%20Bookmark/Metacritic.png" alt="" title="metacritic">
                 {{movie.metascore|default:"-"}}%
             </div>
+        </div>
+        <br>
+        <div class="row">
+            <a class="btn btn-info btn-lg btn-block" href="/movie_list/{{movie.pk}}/edit/" role="button">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Edit info
+            </a>
+            <a class="btn btn-danger btn-lg btn-block" role="button">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete movie
+            </a>
         </div>
     </div>
 </div>
