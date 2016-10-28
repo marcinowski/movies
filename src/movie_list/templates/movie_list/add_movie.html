@@ -1,9 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="" method="post">{% csrf_token %}
-    <table class="table">
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Save" />
-</form>
+<div class="col-md-6">
+    <h3 class="page-header">Fill out this form</h3>
+    <form action="" method="post">{% csrf_token %}
+        <table class="table">
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Save" />
+    </form>
+</div>
+<div class="col-md-6">
+    <h3 class="page-header">Or try searching it in OMDB!</h3>
+    <form action="/movie_list/fetch/" method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            {{ form.title.errors }}
+            <label>Title:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <input id="id_title" class="form-control" name="title" type="text">
+            </div>
+            <label>Year:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <input id="id_year" class="form-control" name="year" type="number">
+            </div>
+        </div>
+        <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
+    </form>
+    <div>
+        {% if result %}
+            <h3>Search results:</h3>
+        {% endif %}
+        {% for movie in result %}
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object" src="{{movie.Poster}}" alt="...">
+                </div>
+                <div class="media-body">
+                <h4 class="media-heading">{{movie.Title}} <small>{{movie.Year}}</small></h4>
+                    <a href="http://www.imdb.com/title/{{movie.imdbID}}/">IMDB Page</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

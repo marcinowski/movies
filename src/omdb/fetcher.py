@@ -59,7 +59,7 @@ class OMDBFetcher(object):
         url = url.format(title=title, year=year, type=d_type, page=page)
         response = self.session.get(url)
         if response.ok:
-            return self._handle_response(response)
+            return self._handle_response(response)['Search']
         else:
             raise DataDownloadError('Problem with downloading data.')
 

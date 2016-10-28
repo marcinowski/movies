@@ -16,6 +16,10 @@ body {
     height:300px;
 }
 
+.media-object img {
+    height:64px;
+}
+
 .thumbnail p {
     height:80px;
 }
