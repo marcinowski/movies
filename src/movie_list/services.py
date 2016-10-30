@@ -1,5 +1,6 @@
+import re
 from django.core.exceptions import MultipleObjectsReturned
-from movie_list.models import Movie
+from movie_list.models import Movie, Person, Genre, Country
 
 
 class ManyResultsFoundException(Exception):
@@ -17,3 +18,21 @@ class MovieService(object):
             return Movie.objects.get(**params)
         except MultipleObjectsReturned:
             raise ManyResultsFoundException('Narrow down get parameters')
+
+    def update_or_create(self, title, year, **params):
+        genre = self._resolve_relational_field(Genre, params.pop('genre', ''))
+        actors = self._resolve_relational_field(Person, params.pop('actors', ''))
+        director = self._resolve_relational_field(Person, params.pop('director', ''))
+        country = self._resolve_relational_field(Country, params.pop('country', ''))
+        obj, _ = Movie.objects.update_or_create(title=title, year=year, defaults=params)
+        obj.genre = genre
+        obj.actors = actors
+        obj.director = director
+        obj.country = country
+
+    @staticmethod
+    def _resolve_relational_field(model, values):
+        objects = re.split(r',[ ]?', values)
+        for obj in objects:
+            model.objects.get_or_create(name=obj)
+        return model.objects.filter(name__in=objects)

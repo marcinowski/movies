@@ -4,6 +4,7 @@ from django.views.generic import View, ListView, DetailView, CreateView, UpdateV
 from django.shortcuts import resolve_url, HttpResponseRedirect
 from movie_list.models import Movie
 from omdb.service import OMDBFetcher
+from movie_list.services import MovieService
 
 
 class MovieCollection(ListView):
@@ -26,14 +27,24 @@ class MovieCreateView(CreateView):
         title = request.GET.get('title', '')
         year = request.GET.get('year', '')
         imdb_id = request.GET.get('imdb_id', '')
+        form = request.GET.get('form', '')
         context = self.get_context_data()
         if (title and year) or imdb_id:
-            context['result'] = OMDBFetcher().get(title=title, year=year, imdb_id=imdb_id)
+            selected_movie = OMDBFetcher().get(title=title, year=year, imdb_id=imdb_id)
+            context['result'] = selected_movie
+            if form:
+                context['selected'] = selected_movie[0]
         elif title:
             context['result'] = OMDBFetcher().page_search(title=title, page=1)
         else:
             context['result'] = []
         return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        data = request.POST.dict()
+        data.pop('csrfmiddlewaretoken', '')
+        MovieService().update_or_create(**data)
+        return HttpResponseRedirect(resolve_url('movie_list'))
 
 
 class FetchOMDBDataView(View):

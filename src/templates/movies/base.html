@@ -21,18 +21,21 @@
     <body>
         <div class="row col-md-10 col-md-offset-1">
             {% block content %}
-            {% endblock %}
+            {% endblock content %}
             {% load static from staticfiles %}
-            <!--<link href="{% static 'movies/libs/css/bootstrap.css' %}" rel="stylesheet" type="text/css">-->
             <link href="{% static 'movies/libs/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
             <link href="{% static 'movies/libs/css/bootstrap-theme.css' %}" rel="stylesheet" type="text/css">
             <link href="{% static 'movies/site/css/movies.css' %}" rel="stylesheet" type="text/css">
         </div>
     </body>
-    <!--<hr>-->
-    <!--<footer class="row">-->
-        <!--<p>Site by: Marcin Muszynski</p>-->
-        <!--<p>Contact information: <a href="mailto:marcinowski007@gmail.com">-->
-        <!--marcinowski007@gmail.com</a>.</p>-->
-    <!--</footer>-->
+    <footer>
+        <div class="col-md-12">
+        <hr>
+        <!--<nav class="navbar navbar-default navbar-bottom">-->
+            <p>Site by: Marcin Muszyński</p>
+            <p>Contact information: <a href="mailto:marcinowski007@gmail.com">
+            marcinowski007@gmail.com</a>.</p>
+        <!--</nav>-->
+        </div>
+    </footer>
 </html>
