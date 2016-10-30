@@ -1,11 +1,34 @@
 import re
-import PIL
 from movie_list import models as mov
 from omdb.mapping import OMDB_MODEL_MAPPING
+from omdb.config import IMDB_MOVIE_BASE_URL
 
 
 # TODO: generalize resolving fields into db, write tests, handle exceptions with parsing
 
+
+class OMDBTranslator(object):
+    def __init__(self, data):
+        self.mapping = OMDB_MODEL_MAPPING
+        self.data = data
+
+    def translate(self):
+        result = {}
+        for key, value in self.data.items():
+            new_key = OMDB_MODEL_MAPPING.get(key, '')
+            if new_key:
+                result.update({new_key: value})
+        return self._modify_special_fields(result)
+
+    def _modify_special_fields(self, result):
+        self._modify_imdb_url(result)
+        return result
+
+    @staticmethod
+    def _modify_imdb_url(result):
+        imdb_id = result.get('imdb_url', '')
+        if imdb_id:
+            result['imdb_url'] = IMDB_MOVIE_BASE_URL.format(movie_id=imdb_id)
 
 class OMDBParser(object):
     def __init__(self, data):
@@ -82,7 +105,7 @@ class OMDBParser(object):
         return self._resolve_relational_field(mov.Person, self.data['Director'])
 
     def _resolve_url_field(self):
-        return 'http://www.imdb.com/title/{}/'.format(self.data['imdbID'])
+        return IMDB_MOVIE_BASE_URL.format(movie_id=self.data['imdbID'])
 
     def _resolve_image_field(self):
         pass

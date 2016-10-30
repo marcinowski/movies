@@ -1,0 +1,20 @@
+{% load custom_tag %}
+<form action="" method="post">{% csrf_token %}
+    {% if result|length == 1 %}
+        <table class="table">
+            {% for field in form %}
+                {{ field.label }}
+                <div>
+                    {% with value=field.name movie=result.0 %}
+                        <input id="id_{{field.name}}" class="form-control" name="{{field.name}}" value="{{ movie|get:value }}">
+                    {% endwith %}
+                </div>
+            {% endfor %}
+        </table>
+    {% else %}
+        <table class="table">
+            {{form.as_table}}
+        </table>
+    {% endif %}
+    <input type="submit" value="Save" />
+</form>

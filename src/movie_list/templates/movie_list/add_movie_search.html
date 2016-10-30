@@ -1,0 +1,30 @@
+<form action="/movie_list/fetch/" method="post">{% csrf_token %}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+                <label>Title:</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <input id="id_title" placeholder="The Room" class="form-control" name="title" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Year:</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <input id="id_year" placeholder="2003" class="form-control" name="year" type="number" min="1900">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>IMDB ID:</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <input id="id_imdb_id" placeholder="tt0368226" class="form-control" name="imdb_id">
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
+</form>
