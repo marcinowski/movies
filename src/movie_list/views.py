@@ -2,7 +2,7 @@ import urllib.parse
 
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import resolve_url, HttpResponseRedirect
-from movie_list.models import Movie
+from movie_list.models import Movie, Genre
 from omdb.service import OMDBFetcher
 from movie_list.services import MovieService
 
@@ -11,13 +11,20 @@ class MovieCollection(ListView):
     model = Movie
     template_name = 'movie_list/movie_list.html'
 
-    def get(self, request, *args, **kwargs):
-        return super(MovieCollection, self).get(request, *args, **kwargs)
-
     def get_queryset(self):
-        query = self.request.GET.dict()
+        query = {key: value for key, value in self.request.GET.dict().items() if value}
         queryset = super(MovieCollection, self).get_queryset()
         return queryset.filter(**query)
+
+    def get_context_data(self, **kwargs):
+        context = super(MovieCollection, self).get_context_data(**kwargs)
+        context['genres'] = Genre.objects.all().values_list('name', flat=True)
+        context['directors'] = Movie.objects.all().values_list('director__name', flat=True)
+        context['actors'] = Movie.objects.all().values_list('actors__name', flat=True)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        pass
 
 
 class MovieDetailView(DetailView):

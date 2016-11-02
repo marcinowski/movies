@@ -1,5 +1,5 @@
 {% load custom_tag %}
-<form action="" method="post">{% csrf_token %}
+<form class="form" action="" method="post">{% csrf_token %}
     <div class="form-group">
         <label>Title:</label>
         <input id="id_title" class="form-control" name="title" type="text" value="{{selected.title}}" required>
