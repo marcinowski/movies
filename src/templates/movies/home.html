@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="page-header">
-        <h1>Main Page</h1>
-    </div>
+    <h1 class="page-header">Main Page</h1>
     <div class="col-md-4 col-sm-12">
         <div class="jumbotron">
             <div class="container">
                 <h3 class="text-center">Search for a movie from your collection!</h3>
                 <form action="" method="post">{% csrf_token %}
-                    {{ form.non_field_errors }}
                     <div class="form-group">
-                        {{ form.title.errors }}
                         <label>Title:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>

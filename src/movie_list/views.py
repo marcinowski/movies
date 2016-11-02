@@ -11,6 +11,14 @@ class MovieCollection(ListView):
     model = Movie
     template_name = 'movie_list/movie_list.html'
 
+    def get(self, request, *args, **kwargs):
+        return super(MovieCollection, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        query = self.request.GET.dict()
+        queryset = super(MovieCollection, self).get_queryset()
+        return queryset.filter(**query)
+
 
 class MovieDetailView(DetailView):
     template_name = 'movie_list/movie_detail.html'

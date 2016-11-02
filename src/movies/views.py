@@ -11,8 +11,4 @@ class MainPage(FormView):
 
     def post(self, request, *args, **kwargs):
         title = request.POST.get('title', None)
-        try:
-            pk = Movie.objects.get(title=title).pk
-            return redirect('/movie_list/' + str(pk))
-        except ObjectDoesNotExist:
-            return redirect('/')
+        return redirect('/movie_list/?title__icontains='+title)
