@@ -5,6 +5,7 @@ from django.shortcuts import resolve_url, HttpResponseRedirect
 from movie_list.models import Movie, Genre
 from omdb.service import OMDBFetcher
 from movie_list.services import MovieService
+from movie_list.mapping import LIST_VIEW_MAPPING
 
 
 class MovieCollection(ListView):
@@ -12,15 +13,17 @@ class MovieCollection(ListView):
     template_name = 'movie_list/movie_list.html'
 
     def get_queryset(self):
-        query = {key: value for key, value in self.request.GET.dict().items() if value}
+        query = {
+            LIST_VIEW_MAPPING[key]: value for key, value in self.request.GET.dict().items() if value
+            }
         queryset = super(MovieCollection, self).get_queryset()
         return queryset.filter(**query)
 
     def get_context_data(self, **kwargs):
         context = super(MovieCollection, self).get_context_data(**kwargs)
         context['genres'] = Genre.objects.all().values_list('name', flat=True)
-        context['directors'] = Movie.objects.all().values_list('director__name', flat=True)
-        context['actors'] = Movie.objects.all().values_list('actors__name', flat=True)
+        context['directors'] = Movie.objects.all().values_list('director__name', flat=True).distinct()
+        context['actors'] = Movie.objects.all().values_list('actors__name', flat=True).distinct()
         return context
 
     def post(self, request, *args, **kwargs):

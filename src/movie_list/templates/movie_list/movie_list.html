@@ -7,8 +7,14 @@
                 <div class="col-md-12">
                     <label for="id_title" class="control-label">Title:</label>
                     <input id="id_title" class="form-control input-sm" name="title" type="text">
-                    <label for="id_year" class="control-label">Year:</label>
-                    <input id="id_year" class="form-control input-sm" name="year" type="number">
+                    <div id="year" class="col-md-6">
+                        <label for="id_year_from" class="control-label">From year:</label>
+                        <input id="id_year_from" class="form-control input-sm" name="year_from" min="1900" value="2000" type="number">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_year_to" class="control-label">To:</label>
+                        <input id="id_year_to" class="form-control input-sm" name="year_to" min="1900" value="2016" type="number">
+                    </div>
                 </div>
             </div>
             <div class="form-group form-group-sm col-md-4">
@@ -31,7 +37,7 @@
             </div>
             <div class="form-group form-group-sm col-md-4">
                 <div class="col-md-12">
-                    <label for="id_genre" class="control-label">Actors:</label>
+                    <label for="id_genre" class="control-label">Genre:</label>
                     <select id="id_genre" class="form-control input-sm" name="genre">
                         <option></option>
                         {% for type in genres %}
