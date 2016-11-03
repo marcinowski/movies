@@ -12,10 +12,23 @@
                 </p>
             </div>
         </div>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-left">
             <li><a href="/">Main Page</a></li>
             <li><a href="/movie_list/">Movie List</a></li>
             <li><a href="/movie_list/add/">Add Movie</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li>
+                <div class="container-fluid">
+                    <p class="navbar-text">Hello {{ user.username }}</p>
+                </div>
+            </li>
+            <li><a href="/movie_list/">Your account</a></li>
+            <li><a href="/user/logout/">Logout</a></li>
+            {% else %}
+            <li><a href="/user/login/">Log in</a></li>
+            {% endif %}
         </ul>
     </nav>
     <body>

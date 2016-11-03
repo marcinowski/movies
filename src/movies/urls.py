@@ -21,5 +21,6 @@ from movies.views import MainPage
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', MainPage.as_view()),
-    url(r'^movie_list/', include('movie_list.urls'))
+    url(r'^movie_list/', include('movie_list.urls')),
+    url('^user/', include('django.contrib.auth.urls')),
 ]
