@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'movie_list'
+    'movie_list',
+    'users',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -103,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/users/profile/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

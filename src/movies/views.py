@@ -1,8 +1,6 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
-from django.db.models import ObjectDoesNotExist
 from movies.forms import SearchMovieForm
-from movie_list.models import Movie
 
 
 class MainPage(FormView):

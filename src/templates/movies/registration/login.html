@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-{% endblock %}
+<div class="col-md-4 col-md-offset-4">
+    <div class="container-fluid">
+        <h1>Login</h1><br>
+        <form class="form" action="" method="post">{% csrf_token %}
+            <input type="text" class="form-control" name="username" placeholder="Username">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="submit" name="login" class="submit" value="Login">
+        </form>
+        <div class="help-block">
+            <a href="#">Register</a> - <a href="#">Forgot Password</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
