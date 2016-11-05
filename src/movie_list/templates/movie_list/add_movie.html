@@ -2,6 +2,11 @@
 {% block content %}
 
 <div class="col-md-6 col-sm-12">
+    {% if alert %}
+        <div class="alert alert-warning">
+            <strong>Warning!</strong> {{alert}}
+        </div>
+    {% endif %}
     <h3 class="page-header">Try searching it in OMDB</h3>
     {% include 'movie_list/add_movie_search.html' %}
     <div>

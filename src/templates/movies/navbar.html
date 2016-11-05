@@ -15,7 +15,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li>
             <div class="container-fluid">
-                <p class="navbar-text">Hello {{ user.username }}</p>
+                <p class="navbar-text">Hello {{ user.get_fullname|default:user.username }}</p>
             </div>
         </li>
         <li><a href="/users/profile/">Your account</a></li>
@@ -23,8 +23,8 @@
     </ul>
     {% else %}
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="/users/register/">Your account</a></li>
-        <li><a href="/users/logout/" style="margin-right: 20px;">>Logout</a></li>
+        <li><a href="/users/register/">Register</a></li>
+        <li><a href="/users/login/" style="margin-right: 20px;">Log in</a></li>
     </ul>
     {% endif %}
 </nav>
