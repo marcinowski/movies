@@ -4,16 +4,16 @@
     <div class="container-fluid">
         <form class="form-horizontal" action="" method="get">
             <div class="form-group form-group-sm col-md-4">
-                <div class="col-md-12">
-                    <label for="id_title" class="control-label">Title:</label>
-                    <input id="id_title" class="form-control input-sm" name="title" type="text">
-                    <div id="year" class="col-md-6">
+                <label for="id_title" class="control-label">Title:</label>
+                <input id="id_title" class="form-control input-sm" name="title" type="text">
+                <div class="row">
+                    <div class="col-md-6">
                         <label for="id_year_from" class="control-label">From year:</label>
-                        <input id="id_year_from" class="form-control input-sm" name="year_from" min="1900" value="2000" type="number">
+                        <input id="id_year_from" class="form-control input-sm" name="year_from" min="1900" placeholder="2000" type="number">
                     </div>
                     <div class="col-md-6">
                         <label for="id_year_to" class="control-label">To:</label>
-                        <input id="id_year_to" class="form-control input-sm" name="year_to" min="1900" value="2016" type="number">
+                        <input id="id_year_to" class="form-control input-sm" name="year_to" min="1900" placeholder="2016" type="number">
                     </div>
                 </div>
             </div>

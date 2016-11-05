@@ -1,5 +1,6 @@
 import re
 from django.core.exceptions import MultipleObjectsReturned
+from django.contrib.auth.models import User
 from movie_list.models import Movie, Person, Genre, Country
 
 
@@ -24,7 +25,8 @@ class MovieService(object):
         actors = self._resolve_relational_field(Person, params.pop('actors', ''))
         director = self._resolve_relational_field(Person, params.pop('director', ''))
         country = self._resolve_relational_field(Country, params.pop('country', ''))
-        obj, _ = Movie.objects.update_or_create(title=title, year=year, defaults=params)
+        user = User.objects.get(username=params.pop('user'))
+        obj, _ = Movie.objects.update_or_create(title=title, year=year, user=user, defaults=params)
         obj.genre = genre
         obj.actors = actors
         obj.director = director

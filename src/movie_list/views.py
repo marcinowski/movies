@@ -1,7 +1,8 @@
 import urllib.parse
 
-from django.views.generic import View, ListView, DetailView, CreateView, UpdateView
+from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import resolve_url, HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
 from movie_list.models import Movie, Genre
 from omdb.service import OMDBFetcher
 from movie_list.services import MovieService
@@ -16,23 +17,27 @@ class MovieCollection(ListView):
         query = {
             LIST_VIEW_MAPPING[key]: value for key, value in self.request.GET.dict().items() if value
             }
+        query['user'] = self.request.user
         queryset = super(MovieCollection, self).get_queryset()
         return queryset.filter(**query)
 
     def get_context_data(self, **kwargs):
         context = super(MovieCollection, self).get_context_data(**kwargs)
+        username = self.request.user
         context['genres'] = Genre.objects.all().values_list('name', flat=True)
-        context['directors'] = Movie.objects.all().values_list('director__name', flat=True).distinct()
-        context['actors'] = Movie.objects.all().values_list('actors__name', flat=True).distinct()
+        context['directors'] = Movie.objects.filter(user=username).values_list('director__name', flat=True).distinct()
+        context['actors'] = Movie.objects.filter(user=username).values_list('actors__name', flat=True).distinct()
         return context
-
-    def post(self, request, *args, **kwargs):
-        pass
 
 
 class MovieDetailView(DetailView):
     template_name = 'movie_list/movie_detail.html'
-    queryset = Movie.objects.all()
+    model = Movie
+
+    def get_queryset(self):
+        queryset = super(MovieDetailView, self).get_queryset()
+        user = self.request.user
+        return queryset.filter(user=user)
 
 
 class MovieCreateView(CreateView):
@@ -51,7 +56,7 @@ class MovieCreateView(CreateView):
             selected_movie = OMDBFetcher().get(title=title, year=year, imdb_id=imdb_id)
             context['result'] = selected_movie
             if form:
-                context['selected'] = selected_movie[0]
+                context['movie'] = selected_movie[0]
         elif title:
             context['result'] = OMDBFetcher().page_search(title=title, page=1)
         else:
@@ -61,6 +66,7 @@ class MovieCreateView(CreateView):
     def post(self, request, *args, **kwargs):
         data = request.POST.dict()
         data.pop('csrfmiddlewaretoken', '')
+        data['user'] = self.request.user
         MovieService().update_or_create(**data)
         return HttpResponseRedirect(resolve_url('movie_list'))
 
@@ -80,6 +86,23 @@ class FetchOMDBDataView(View):
 
 
 class MovieEditView(UpdateView):
-    template_name = 'movie_list/add_movie.html'
+    template_name = 'movie_list/edit_movie.html'
     model = Movie
     fields = '__all__'
+
+    def get_queryset(self):
+        queryset = super(MovieEditView, self).get_queryset()
+        user = self.request.user
+        return queryset.filter(user=user)
+
+
+class MovieDeleteView(DeleteView):
+    template_name = 'movie_list/delete_movie.html'
+    success_url = reverse_lazy('movie_list')
+    model = Movie
+
+    def get_queryset(self):
+        queryset = super(MovieDeleteView, self).get_queryset()
+        user = self.request.user
+        return queryset.filter(user=user)
+

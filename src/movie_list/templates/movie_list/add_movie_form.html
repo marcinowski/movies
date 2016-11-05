@@ -2,11 +2,11 @@
 <form class="form" action="" method="post">{% csrf_token %}
     <div class="form-group">
         <label>Title:</label>
-        <input id="id_title" class="form-control" name="title" type="text" value="{{selected.title}}" required>
+        <input id="id_title" class="form-control" name="title" type="text" value="{{movie.title}}" required>
     </div>
     <div class="form-group">
         <label>Year:</label>
-        <input id="id_year" class="form-control" name="year" type="number" min="1900" value="{{selected.year}}" required>
+        <input id="id_year" class="form-control" name="year" type="number" min="1900" value="{{movie.year}}" required>
     </div>
     <div class="form-group">
         <label>Description:</label>
@@ -15,33 +15,33 @@
                 class="form-control"
                 rows="4"
                 name="description"
-        >{{selected.description}}</textarea>
+        >{{movie.description}}</textarea>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
             <label>IMDB Rating:</label>
-            <input id="id_imdb_rating" class="form-control" name="imdb_rating" type="number" value="{{selected.imdb_rating}}">
+            <input id="id_imdb_rating" class="form-control" name="imdb_rating" type="number" value="{{movie.imdb_rating}}">
         </div>
         <div class="col-md-6">
             <label>Metascore:</label>
-            <input id="id_metascore" class="form-control" name="metascore" type="number" value="{{selected.metascore}}">
+            <input id="id_metascore" class="form-control" name="metascore" type="number" value="{{movie.metascore}}">
         </div>
     </div>
     <div class="form-group">
         <label>IMDB url:</label>
-        <input id="id_imdb_url" class="form-control" name="imdb_url" type="url" value="{{selected.imdb_url}}">
+        <input id="id_imdb_url" class="form-control" name="imdb_url" type="url" value="{{movie.imdb_url}}">
         <label>Icon url:</label>
-        <input id="id_icon" class="form-control" name="icon" type="url" value="{{selected.icon}}">
+        <input id="id_icon" class="form-control" name="icon" type="url" value="{{movie.icon}}">
     </div>
     <div class="form-group">
         <label>Genre:</label>
-        <input id="id_genre" class="form-control" name="genre" type="text" value="{{selected.genre}}">
+        <input id="id_genre" class="form-control" name="genre" type="text" value="{{movie.genre}}">
         <label>Country:</label>
-        <input id="id_country" class="form-control" name="country" type="text" value="{{selected.country}}">
+        <input id="id_country" class="form-control" name="country" type="text" value="{{movie.country}}">
         <label>Director:</label>
-        <input id="id_director" class="form-control" name="director" type="text" value="{{selected.director}}">
+        <input id="id_director" class="form-control" name="director" type="text" value="{{movie.director}}">
         <label>Actors:</label>
-        <input id="id_actors" class="form-control" name="actors" type="text" value="{{selected.actors}}">
+        <input id="id_actors" class="form-control" name="actors" type="text" value="{{movie.actors}}">
     </div>
     <input class="btn btn-success btn-lg btn-block" type="submit" value="Submit" />
 </form>

@@ -30,7 +30,11 @@ class OMDBTranslator(object):
         if imdb_id:
             result['imdb_url'] = IMDB_MOVIE_BASE_URL.format(movie_id=imdb_id)
 
+
 class OMDBParser(object):
+    """
+    This is not used
+    """
     def __init__(self, data):
         self.mapping = OMDB_MODEL_MAPPING
         self.data = data

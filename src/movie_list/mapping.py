@@ -4,5 +4,5 @@ LIST_VIEW_MAPPING = {
     'year_to': 'year__lte',
     'actors': 'actors__name',
     'director': 'director__name',
-    'genre': 'genre__name'
+    'genre': 'genre__name',
 }

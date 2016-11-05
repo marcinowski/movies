@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -24,12 +25,12 @@ class Country(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField(blank=True, max_length=300)
     year = models.IntegerField(blank=True, null=True)
-    metascore = models.IntegerField(default=0)
-    imdb_rating = models.FloatField(default=0.0)
+    user = models.ForeignKey(User)
+    description = models.TextField(blank=True, max_length=300)
+    metascore = models.IntegerField(blank=True, default=0)
+    imdb_rating = models.FloatField(blank=True, default=0.0)
     imdb_url = models.URLField(blank=True, null=True)
-    # icon = models.ImageField(upload_to='posters', blank=True, null=True)
     icon = models.URLField(blank=True, null=True)
     genre = models.ManyToManyField(Genre, blank=True)
     country = models.ManyToManyField(Country, blank=True)
@@ -37,7 +38,7 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Person, blank=True, related_name='actors')
 
     class Meta:
-        unique_together = ('title', 'year')
+        unique_together = ('title', 'year', 'user')
 
     def __str__(self):
         return '{title} ({year})'.format(title=self.title, year=self.year)
