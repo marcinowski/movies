@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include 'movie_list/add_movie_form.html' %}
+<div class="col-md-8 col-md-offset-2">
+    <h3 class="page-header">Edit movie:</h3>
+    {% include 'movie_list/add_movie_form.html' %}
+</div>
 {% endblock content %}

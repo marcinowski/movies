@@ -100,6 +100,23 @@ class MovieEditView(UpdateView):
         user = self.request.user
         return queryset.filter(user=user)
 
+    def get_context_data(self, **kwargs):
+        # Fixme: this is not a beauty, solution would be serialization
+        context = {'movie': self.object.__dict__}
+        context['movie']['genre'] = ', '.join(list(self.object.genre.all().values_list('name', flat=True)))
+        context['movie']['actors'] = ', '.join(list(self.object.actors.all().values_list('name', flat=True)))
+        context['movie']['director'] = ', '.join(list(self.object.director.all().values_list('name', flat=True)))
+        context['movie']['country'] = ', '.join(list(self.object.country.all().values_list('name', flat=True)))
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        data = request.POST.dict()
+        data.pop('csrfmiddlewaretoken', '')
+        data['user'] = self.request.user
+        MovieService().update_or_create(**data)
+        return HttpResponseRedirect(reverse_lazy('movie_detail', kwargs={'pk': self.object.pk}))
+
 
 class MovieDeleteView(DeleteView):
     template_name = 'movie_list/delete_movie.html'
