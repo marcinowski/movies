@@ -26,4 +26,4 @@ class UserCreateView(View):
         data = request.POST.dict()
         data.pop('csrfmiddlewaretoken', '')
         User.objects.create_user(**data)
-        return render(request, template_name='/users/create_profile_success.html', context={})
+        return render(request, template_name='users/create_profile_success.html', context={})

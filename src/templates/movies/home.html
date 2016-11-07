@@ -2,7 +2,7 @@
 {% block content %}
     <h1 class="page-header">Main Page</h1>
     <div class="col-md-4 col-sm-12">
-        <div class="jumbotron" style="bg-color:navy-blue;">
+        <div class="jumbotron">
             <div class="container">
                 <h3 class="text-center">Search for a movie from your collection!</h3>
                 <form action="" method="post">{% csrf_token %}
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="col-md-4 col-sm-12">
-        <div class="jumbotron" style="background-color">
+        <div class="jumbotron">
             <div class="container">
                 <h3 class="text-center">Check out Your list of movies</h3>
                 <div>
@@ -37,3 +37,6 @@
         </div>
     </div>
 {% endblock content %}
+{% block login %}
+    {% include 'anonymous_main.html' %}
+{% endblock login %}
