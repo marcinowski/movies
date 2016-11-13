@@ -4,6 +4,14 @@
         <meta charset="UTF-8">
         <title>Awesome site</title>
     </head>
+    <div>
+        {% load static from staticfiles %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'movies/libs/js/bootstrap.min.js' %}"></script>
+        <link href="{% static 'movies/libs/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'movies/libs/css/bootstrap-theme.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'movies/site/css/movies.css' %}" rel="stylesheet" type="text/css">
+    </div>
     {% include 'navbar.html' %}
     <body>
         <div class="row col-md-10 col-md-offset-1 col-xs-md-10 col-xs-offset-1">
@@ -14,11 +22,6 @@
                 {% block login %}
                 {% endblock login %}
             {% endif %}
-            {% load static from staticfiles %}
-            <script type="text/javascript" src="{% static 'movies/libs/js/bootstrap.min.js' %}"></script>
-            <link href="{% static 'movies/libs/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-            <link href="{% static 'movies/libs/css/bootstrap-theme.css' %}" rel="stylesheet" type="text/css">
-            <link href="{% static 'movies/site/css/movies.css' %}" rel="stylesheet" type="text/css">
         </div>
     </body>
     {% include 'footer.html' %}

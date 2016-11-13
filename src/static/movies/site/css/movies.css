@@ -40,7 +40,7 @@ body {
 
 .jumbotron {
     height:350px;
-    background-color: #eee0;
+    background-color: rgba(238, 238, 238, 0);
 }
 
 .jumbotron btn {
