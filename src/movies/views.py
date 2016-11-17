@@ -9,4 +9,4 @@ class MainPage(FormView):
 
     def post(self, request, *args, **kwargs):
         title = request.POST.get('title', None)
-        return redirect('/movie_list/?title='+title)
+        return redirect('/movie_list/?title=' + title)
