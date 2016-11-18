@@ -1,8 +1,8 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
-from movies.forms import SearchMovieForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from movies.forms import SearchMovieForm
 
 
 class MainPage(FormView):
