@@ -17,7 +17,7 @@ class MovieCollection(ListView):
     def get_queryset(self):
         query = {
             LIST_VIEW_MAPPING[key]: value for key, value in self.request.GET.dict().items() if value
-            }
+        }
         query['user'] = self.request.user
         queryset = super(MovieCollection, self).get_queryset()
         return queryset.filter(**query)
@@ -126,4 +126,3 @@ class MovieDeleteView(DeleteView):
         queryset = super(MovieDeleteView, self).get_queryset()
         user = self.request.user
         return queryset.filter(user=user)
-
