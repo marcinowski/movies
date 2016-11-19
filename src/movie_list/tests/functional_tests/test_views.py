@@ -23,6 +23,10 @@ class TestCollectionView(TestCase):
         self.movie_2.actors.add(self.person_2)
         self.movie_2.director.add(self.person_1)
         self.movie_2.genre.add(self.genre_2)
+        self.movie_2 = Movie.objects.create(title='movie_2', year=1000, user=self.user_2)
+        self.movie_1.actors.add(self.person_1)
+        self.movie_1.director.add(self.person_2)
+        self.movie_1.genre.add(self.genre_1)
 
     def test_user_is_authenticated(self):
         self.assertTrue(self.user.is_active)
