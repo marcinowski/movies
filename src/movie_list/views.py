@@ -24,10 +24,9 @@ class MovieCollection(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(MovieCollection, self).get_context_data(**kwargs)
-        username = self.request.user
-        context['genres'] = Genre.objects.all().values_list('name', flat=True)
-        context['directors'] = Movie.objects.filter(user=username).values_list('director__name', flat=True).distinct()
-        context['actors'] = Movie.objects.filter(user=username).values_list('actors__name', flat=True).distinct()
+        context['genres'] = MovieService.get_genre_list()
+        context['directors'] = MovieService.get_directors_list_for_user(self.request.user)
+        context['actors'] = MovieService.get_actors_list_for_user(self.request.user)
         return context
 
 
