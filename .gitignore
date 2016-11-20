@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-src/movies/database/
+src/movies/database/*
 .idea/
 *.pyc
 src/movies/settings/local.py
