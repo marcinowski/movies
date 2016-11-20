@@ -5,4 +5,6 @@ python:
 install: "pip install -r requirements.txt"
 before_script: cd src
 # command to run tests
-script: py.test --pep8 --mccabe
+script: py.test --pep8 --mccabe --ds=movies.settings.ci
+notifications:
+    email: false
