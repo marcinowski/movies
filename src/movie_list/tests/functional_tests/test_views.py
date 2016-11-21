@@ -1,9 +1,9 @@
-from urllib.parse import urlencode
 from collections import OrderedDict
 from django.test import TestCase
 from django.shortcuts import resolve_url
 from django.contrib.auth.models import User
 from unittest.mock import patch
+
 from movie_list.models import Movie, Genre, Country, Person
 
 
@@ -148,3 +148,58 @@ class TestFetchOMDBDataView(TestMoviesView):
         self.assertTrue('title=test' in response.url)
         self.assertTrue('year=2000' in response.url)
         self.assertTrue('imdb_id=1' in response.url)
+
+
+class TestMovieEditView(TestMoviesView):
+    def setUp(self):
+        super(TestMovieEditView, self).setUp()
+        self.movie_1 = Movie.objects.create(title='movie_1', year=2000, user=self.user, id=1)
+        self.url = resolve_url('/movie_list/1/edit/')
+
+    def test_get_context(self):
+        person_1 = Person.objects.create(name='test_person_1')
+        person_2 = Person.objects.create(name='test_person_2')
+        genre_1 = Genre.objects.create(name='test_genre_1')
+        genre_2 = Genre.objects.create(name='test_genre_2')
+        self.movie_1.actors.add(person_1, person_2)
+        self.movie_1.director.add(person_1)
+        self.movie_1.genre.add(genre_1, genre_2)
+        self.movie_1.save()
+        response = self.client.get(self.url)
+        self.assertEqual(response.context['movie']['genre'], 'test_genre_1, test_genre_2')
+        self.assertEqual(response.context['movie']['actors'], 'test_person_1, test_person_2')
+        self.assertEqual(response.context['movie']['director'], 'test_person_1')
+        self.assertEqual(response.context['movie']['country'], '')
+
+    def test_post(self):
+        data = {
+            'title': 'movie_1',
+            'year': 2000,
+            'user': self.user,
+            'actors': 'test_person_1, test_person_3',
+            'country': 'test_country',
+            'metascore': 99
+        }
+        response = self.client.post(self.url, data=data, user=self.user)
+        self.assertEqual(response.status_code, 302)
+        movie = Movie.objects.get(id=1)
+        self.assertEqual(movie.metascore, 99)
+        self.assertEqual(Person.objects.count(), 3)
+        self.assertEqual(movie.actors.count(), 2)
+        self.assertTrue(Person.objects.filter(name='test_person_3').exists())
+        self.assertTrue(Country.objects.filter(name='test_country').exists())
+
+
+class TestMovieDeleteView(TestMoviesView):
+    def setUp(self):
+        super(TestMovieDeleteView, self).setUp()
+        self.movie_1 = Movie.objects.create(title='movie_1', year=2000, user=self.user, id=1)
+        self.url = resolve_url('/movie_list/1/delete/')
+
+    def test_response_200(self):
+        pass
+
+    def test_delete_model(self):
+        self.assertTrue(Movie.objects.filter(title='movie_1').exists())
+        self.client.delete(self.url)
+        self.assertFalse(Movie.objects.filter(title='movie_1').exists())
