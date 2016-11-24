@@ -9,6 +9,6 @@ DATABASES = {
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-ALLOWED_HOSTS.append('https://collectmovies.herokuapp.com/')
+ALLOWED_HOSTS.append('*')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
