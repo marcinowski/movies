@@ -1,1 +1,1 @@
-web: gunicorn --env DJANGO_SETTINGS_MODULE=src.movies.settings.production src.movies.wsgi --log-file - /src
+web: gunicorn --env DJANGO_SETTINGS_MODULE=src.movies.settings.production src.movies.wsgi --log-file - --chdir src
