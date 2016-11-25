@@ -22,6 +22,8 @@ class OMDBTranslator(object):
 
     def _modify_special_fields(self, result):
         self._modify_imdb_url(result)
+        self._modify_metascore(result)
+        self._modify_imdb_rating(result)
         return result
 
     @staticmethod
@@ -29,6 +31,18 @@ class OMDBTranslator(object):
         imdb_id = result.get('imdb_url', '')
         if imdb_id:
             result['imdb_url'] = IMDB_MOVIE_BASE_URL.format(movie_id=imdb_id)
+
+    @staticmethod
+    def _modify_metascore(result):
+        metascore = result.get('metascore', '')
+        if metascore == 'N/A':
+            result['metascore'] = 0
+
+    @staticmethod
+    def _modify_imdb_rating(result):
+        imdb_rating = result.get('imdb_rating', '')
+        if imdb_rating == 'N/A':
+            result['imdb_rating'] = 0.0
 
 
 class OMDBParser(object):

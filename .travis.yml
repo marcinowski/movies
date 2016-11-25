@@ -6,10 +6,6 @@ install: "pip install -r requirements.txt"
 before_script: cd src
 # command to run tests
 script: py.test --pep8 --mccabe --ds=movies.settings.ci
-deploy:
-    provider: heroku
-    api_key: 97682699-6c97-4405-ac95-dd3c608047aa
-    app: collectmovies
 
 notifications:
     email: false

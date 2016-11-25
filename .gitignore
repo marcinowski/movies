@@ -4,3 +4,4 @@ src/movies/database/*
 .cache/
 *.pyc
 src/movies/settings/local.py
+/movies_env/

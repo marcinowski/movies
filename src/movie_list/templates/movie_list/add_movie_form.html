@@ -20,11 +20,11 @@
     <div class="form-group row">
         <div class="col-md-6">
             <label>IMDB Rating:</label>
-            <input id="id_imdb_rating" class="form-control" name="imdb_rating" type="number" value="{{movie.imdb_rating}}">
+            <input id="id_imdb_rating" class="form-control" min="0" max="10" step="0.1" name="imdb_rating" type="number" value="{{movie.imdb_rating}}">
         </div>
         <div class="col-md-6">
             <label>Metascore:</label>
-            <input id="id_metascore" class="form-control" name="metascore" type="number" value="{{movie.metascore}}">
+            <input id="id_metascore" class="form-control" min="0" max="100" step="1" name="metascore" type="number" value="{{movie.metascore}}">
         </div>
     </div>
     <div class="form-group">
