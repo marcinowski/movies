@@ -2,7 +2,7 @@
 
 # Movie Collection: #
 
-[Check it out here!](http://www.collectmovies.herokuapp.com/)
+[Check it out here!](https://collectmovies.herokuapp.com/)
 
 ### This app allows you to ###
 * sing in and set up your personal collection
