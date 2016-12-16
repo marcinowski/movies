@@ -8,8 +8,6 @@
     </head>
     <div>
         {% load static from staticfiles %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="{% static 'movies/libs/js/bootstrap.min.js' %}"></script>
         <link href="{% static 'movies/libs/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'movies/libs/css/bootstrap-theme.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'movies/site/css/movies.css' %}" rel="stylesheet" type="text/css">
@@ -27,4 +25,10 @@
         </div>
     </body>
     {% include 'footer.html' %}
+        <div>
+        {% load static from staticfiles %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'movies/libs/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'movies/site/js/movies.js' %}"></script>
+    </div>
 </html>

@@ -1,40 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1 class="page-header">Main Page</h1>
-    <div class="col-md-4 col-sm-12">
-        <div class="jumbotron">
-            <div class="container">
-                <h3 class="text-center">Search for a movie from your collection!</h3>
-                <form action="" method="post">{% csrf_token %}
-                    <div class="form-group">
-                        <label>Title:</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                            <input autofocus id="id_title" class="form-control" name="title" type="text">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="http://placehold.it/1200x400/16a085/ffffff/?text=Search">
+                <div class="carousel-caption">
+                    <form action="" method="post">{% csrf_token %}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input autofocus id="id_title" placeholder="Movie title" class="form-control input-lg" name="title" type="text">
+                                <span class="input-group-btn">
+                                    <input class="btn btn-success btn-lg" type="submit" value="Search"/>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <input class="btn btn-success btn-lg btn-block" type="submit" value="Search" />
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-12">
-        <div class="jumbotron">
-            <div class="container">
-                <h3 class="text-center">Check out Your list of movies</h3>
-                <div>
-                    <p><a class="btn btn-info btn-lg btn-block" href="/movie_list/" role="button">Movie list</a></p>
+                    </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-12">
-        <div class="jumbotron">
-            <div class="container">
-                <h3 class="text-center">Add a movie to your collection</h3>
-                <p><a class="btn btn-info btn-lg btn-block" href="/movie_list/add/" role="button">Add a movie</a></p>
+            <!-- End Item -->
+            <div class="item">
+                <a href="/movie_list/">
+                    <img src="http://placehold.it/1200x400/e67e22/ffffff/?text=Collection">
+                    <div class="carousel-caption">
+                        <p>Check out Your movies collection!</p>
+                    </div>
+                </a>
             </div>
+            <!-- End Item -->
+            <div class="item">
+                <a href="/movie_list/add/">
+                    <img src="http://placehold.it/1200x400/2980b9/ffffff/?text=Add">
+                    <div class="carousel-caption">
+                        <p>Add a movie to your collection</p>
+                    </div>
+                </a>
+            </div>
+            <!-- End Item -->
         </div>
+        <!-- End Carousel Inner -->
+        <ul class="nav nav-pills nav-justified">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Search movie</a></li>
+            <li data-target="#myCarousel" data-slide-to="1"><a href="#">Movie collection</a></li>
+            <li data-target="#myCarousel" data-slide-to="2"><a href="#">Add movie</a></li>
+        </ul>
     </div>
 {% endblock content %}
 {% block login %}
