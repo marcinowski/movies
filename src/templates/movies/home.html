@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1 class="page-header">Main Page</h1>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-pause="hover">
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
@@ -24,7 +24,7 @@
                 <a href="/movie_list/">
                     <img src="http://placehold.it/1200x400/e67e22/ffffff/?text=Collection">
                     <div class="carousel-caption">
-                        <p>Check out Your movies collection!</p>
+                        <p class="hidden-xs">Check out Your movies collection!</p>
                     </div>
                 </a>
             </div>
@@ -33,7 +33,7 @@
                 <a href="/movie_list/add/">
                     <img src="http://placehold.it/1200x400/2980b9/ffffff/?text=Add">
                     <div class="carousel-caption">
-                        <p>Add a movie to your collection</p>
+                        <p class="hidden-xs">Add a movie to your collection</p>
                     </div>
                 </a>
             </div>
