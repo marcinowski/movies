@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1 class="page-header">Main Page</h1>
+    <div class="row visible-xs-block">
+        <div class="input-group">
+            <input autofocus id="id_title_xs" placeholder="Movie title" class="form-control input-lg" name="title" type="text">
+            <span class="input-group-btn">
+                <input class="btn btn-success btn-lg" type="submit" value="Search"/>
+            </span>
+        </div>
+        <br>
+    </div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-pause="hover">
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
@@ -9,7 +18,7 @@
                 <div class="carousel-caption">
                     <form action="" method="post">{% csrf_token %}
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group hidden-xs">
                                 <input autofocus id="id_title" placeholder="Movie title" class="form-control input-lg" name="title" type="text">
                                 <span class="input-group-btn">
                                     <input class="btn btn-success btn-lg" type="submit" value="Search"/>
